@@ -55,6 +55,7 @@ Global:
 - `GameSenseHeartbeatIntervalMs`: Set the interval in milliseconds how often a heartbeat will be sent to the GameSense GG software, when no sensor was updated
 - `RunAsAdmin`: Set to `true` if you want to run the application as administrator
 - `ShowCapsLockIndicator`: Set to `true` if you want the Caps Lock marker to display on the OLED.
+- `IsStorageEnabled`: Set to `true` to enable storage/disk sensor polling. Defaults to `false` because continuous polling can cause clicking noises on mechanical hard drives.
 - `CapsLockIndicatorTextLine1`: Text that is prepended to line 1 when Caps Lock is active (default `⇪ `). Stick to BMP-friendly glyphs so surrogate-pair emoji do not break the display.
 - `CapsLockIndicatorTextLine2`: Text that is prepended to line 2 when Caps Lock is active (default two spaces) to keep the second line aligned when the first line receives the marker.
 

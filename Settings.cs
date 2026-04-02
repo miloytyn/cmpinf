@@ -19,6 +19,8 @@ public class Settings
     public HardwareAccessMode HardwareAccessMode { get; set; } = HardwareAccessMode.Full;
     [JsonProperty("ShowCapsLockIndicator")]
     public bool ShowCapsLockIndicator { get; set; } = true;
+    [JsonProperty("IsStorageEnabled")]
+    public bool IsStorageEnabled { get; set; } = false;
     [JsonProperty("CapsLockIndicatorTextLine1")]
     public string CapsLockIndicatorTextLine1 { get; set; } = "⇪ ";
     [JsonProperty("CapsLockIndicatorTextLine2")]
@@ -34,6 +36,7 @@ public class Settings
             GameSenseHeartbeatIntervalMs = 10000,
             HardwareAccessMode = HardwareAccessMode.Full,
             ShowCapsLockIndicator = true,
+            IsStorageEnabled = false,
             CapsLockIndicatorTextLine1 = "⇪ ",
             CapsLockIndicatorTextLine2 = "  ",
             Pages = new List<OledPage>
