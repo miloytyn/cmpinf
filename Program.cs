@@ -128,7 +128,7 @@ class Program
         var desiredMode = DetermineHardwareAccessMode(settings);
         if (!File.Exists(sensorsPath))
         {
-            GenerateAvailableSensors(sensorsPath, desiredMode, "Initial sensor scan");
+            GenerateAvailableSensors(sensorsPath, desiredMode, "Initial sensor scan", settings.IsStorageEnabled);
         }
 
         // Admin rights check
@@ -165,7 +165,7 @@ class Program
         settingsMenu.DropDownItems.Add("Regenerate available-sensors.json (after installing PawnIO)", null, (s, e) => {
             try {
                 var desiredMode = DetermineHardwareAccessMode(settings);
-                GenerateAvailableSensors(SensorsFile, desiredMode, "Manual sensor regeneration");
+                GenerateAvailableSensors(SensorsFile, desiredMode, "Manual sensor regeneration", settings.IsStorageEnabled);
                 Log.Info("available-sensors.json regenerated.");
             } catch (Exception ex) { Log.Warn($"Regenerate sensors failed: {ex.Message}"); }
         });
@@ -174,7 +174,7 @@ class Program
                 if (!File.Exists(SensorsFile))
                 {
                     var desiredMode = DetermineHardwareAccessMode(settings);
-                    GenerateAvailableSensors(SensorsFile, desiredMode, "Opening available-sensors.json");
+                    GenerateAvailableSensors(SensorsFile, desiredMode, "Opening available-sensors.json", settings.IsStorageEnabled);
                 }
                 System.Diagnostics.Process.Start(new System.Diagnostics.ProcessStartInfo
                 {
@@ -312,7 +312,7 @@ class Program
             return;
         }
         var desiredMode = DetermineHardwareAccessMode(settings);
-        var hardwareReader = new HardwareReader(desiredMode);
+        var hardwareReader = new HardwareReader(desiredMode, settings.IsStorageEnabled);
         CheckConfiguredSensorsExist(hardwareReader, settings);
         if (settings.Pages.Count == 0 || settings.Pages.All(p => p.Sensors.Count == 0))
         {
@@ -540,9 +540,9 @@ class Program
         return mode;
     }
 
-    static void GenerateAvailableSensors(string path, HardwareAccessMode desiredMode, string context)
+    static void GenerateAvailableSensors(string path, HardwareAccessMode desiredMode, string context, bool isStorageEnabled = false)
     {
-        var reader = new HardwareReader(desiredMode);
+        var reader = new HardwareReader(desiredMode, isStorageEnabled);
         reader.ExportSensors(path);
     }
 }

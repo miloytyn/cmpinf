@@ -51,7 +51,7 @@ public class HardwareReader
     {
     }
 
-    public HardwareReader(HardwareAccessMode accessMode)
+    public HardwareReader(HardwareAccessMode accessMode, bool isStorageEnabled = false)
     {
         _accessMode = accessMode;
         _computer = new Computer
@@ -62,7 +62,7 @@ public class HardwareReader
             IsMemoryEnabled = true,
             IsControllerEnabled = accessMode == HardwareAccessMode.Full,
             IsNetworkEnabled = true,
-            IsStorageEnabled = true
+            IsStorageEnabled = isStorageEnabled
         };
 
         if (_accessMode == HardwareAccessMode.SafeUserMode)
